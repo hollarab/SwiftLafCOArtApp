@@ -10,10 +10,12 @@ import UIKit
 
 class DetailViewController: UIViewController {
 
-    @IBOutlet weak var detailDescriptionLabel: UILabel!
+    @IBOutlet weak var topLabel: UILabel!
+    @IBOutlet weak var bottomLabel: UILabel!
+    @IBOutlet weak var artImageView: UIImageView!
 
 
-    var detailItem: AnyObject? {
+    var detailItem: WorkOfArt? {
         didSet {
             // Update the view.
             self.configureView()
@@ -23,8 +25,16 @@ class DetailViewController: UIViewController {
     func configureView() {
         // Update the user interface for the detail item.
         if let detail: AnyObject = self.detailItem {
-            if let label = self.detailDescriptionLabel {
-                label.text = detail.description
+            if let label = self.topLabel {
+                label.text = detailItem!.title
+            }
+            
+            if let imageView = artImageView {
+                imageView.image = UIImage(named: detailItem!.imageName!)
+            }
+            
+            if let label = bottomLabel {
+                label.text = "by \(detailItem!.artist!)"
             }
         }
     }
